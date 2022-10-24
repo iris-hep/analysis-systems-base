@@ -4,10 +4,7 @@ from pathlib import Path
 
 import nox
 
-ALL_PYTHONS = ["3.8", "3.9", "3.10"]
-
 # Default sessions to run if no session handles are passed
-# nox.options.sessions = ["lint", "tests-3.10"]
 nox.options.sessions = ["lock"]
 
 
@@ -24,15 +21,25 @@ def lock(session):
     session.run("conda-lock", "--help")
     session.run("conda-lock", "lock", "--help")
     session.run("conda-lock", "install", "--help")
+    # session.run(
+    #     "conda-lock",
+    #     "lock",
+    #     "--platform",
+    #     "linux-64",
+    #     "--file",
+    #     "docker/environment.yml",
+    #     "--lockfile",
+    #     "docker/conda-lock.yml",
+    # )
     session.run(
         "conda-lock",
         "lock",
         "--platform",
         "linux-64",
         "--file",
-        "docker/environment.yml",
+        "docker/old-environment.yml",
         "--lockfile",
-        "docker/conda-lock.yml",
+        "docker/old-conda-lock.yml",
     )
 
 
