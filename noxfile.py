@@ -31,15 +31,27 @@ def lock(session):
     #     "--lockfile",
     #     "docker/conda-lock.yml",
     # )
+    # session.run(
+    #     "conda-lock",
+    #     "lock",
+    #     "--platform",
+    #     "linux-64",
+    #     "--file",
+    #     "docker/old-environment.yml",
+    #     "--lockfile",
+    #     "docker/old-conda-lock.yml",
+    # )
     session.run(
         "conda-lock",
         "lock",
         "--platform",
         "linux-64",
         "--file",
-        "docker/old-environment.yml",
+        "docker/environment-full.yml",
+        "--kind",
+        "lock",
         "--lockfile",
-        "docker/old-conda-lock.yml",
+        "docker/full.conda-lock.yml",
     )
 
 
