@@ -55,6 +55,8 @@ def build(session):
         "docker/Dockerfile",
         "--tag",
         "iris-hep/analysis-systems-base:latest",
+        "--tag",
+        "iris-hep/analysis-systems-base:2022-10-24",
         "docker",
         external=True
     )
