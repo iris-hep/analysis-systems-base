@@ -1,2 +1,5 @@
 # Ignore nox
 .nox/
+
+# Python stuff
+__pycache__/
