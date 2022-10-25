@@ -46,7 +46,7 @@ def lock(session):
         "--platform",
         "linux-64",
         "--file",
-        "docker/environment-full.yml",
+        "docker/environment.yml",
         "--kind",
         "lock",
         "--lockfile",

@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY environment-full.yml /docker/environment-full.yml
+COPY environment.yml /docker/environment.yml
 COPY full.conda-lock.yml /docker/conda-lock.yml
 COPY requirements.lock /docker/requirements.lock
 COPY requirements.txt /docker/requirements.txt
