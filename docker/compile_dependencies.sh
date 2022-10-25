@@ -12,6 +12,7 @@ fi
 cd docker
 pip-compile \
     --generate-hashes \
-    --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html \
+    --extra-index-url https://download.pytorch.org/whl/cpu/ \
+    --extra-index-url https://google-coral.github.io/py-repo/ \
     --output-file _requirements.lock \
     requirements.txt

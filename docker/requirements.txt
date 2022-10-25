@@ -9,9 +9,10 @@ tritonclient[all]
 torch==1.12.1
 tflite-runtime
 onnxruntime
---find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html
-torch-scatter
-torch-sparse
-torch-cluster
-torch-spline-conv
+# Not a real index, so can't rely on hash discovery
+# --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html
+# torch-scatter
+# torch-sparse
+# torch-cluster
+# torch-spline-conv
 torch-geometric
