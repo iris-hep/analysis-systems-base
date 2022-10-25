@@ -5,6 +5,7 @@ FROM coffeateam/coffea-dask:0.7.19-fastjet-3.3.4.0rc9-ge92ece7 as base
 
 COPY environment-full.yml /docker/environment-full.yml
 COPY full.conda-lock.yml /docker/conda-lock.yml
+COPY requirements.lock /docker/requirements.lock
 # RUN mamba activate base && \
 #     mamba env update --file docker/conda-lock.yml
 # RUN mamba env update --file /docker/conda-lock.yml
@@ -27,7 +28,13 @@ RUN mamba install --yes conda-lock && \
     conda-lock install \
         --mamba \
         --name debug \
-        /docker/conda-lock.yml
+        /docker/conda-lock.yml && \
+    mamba activate debug && \
+    python -m pip --no-cache-dir install \
+        --no-deps \
+        --require-hashes \
+        --only-binary :all: \
+        --requirement /docker/requirements.lock
 
 # Make images Singularity compatible
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
