@@ -2109,16 +2109,16 @@ package:
   version: 2.2.0
 - category: main
   dependencies:
-    python: '>=3.6'
+    python: '>=3.7'
   hash:
-    md5: c267da48ce208905d7d976d49dfd9433
-    sha256: fcab1a16af5daf3a1ea9b0a7ed15615f0d5fff05ff4925ed570988868bb29e38
+    md5: 3faab06a954c2a04039983f2c4a50d99
+    sha256: 2c1b2e9755ce3102bca8d69e8f26e4f087ece73f50418186aee7c74bef8e1698
   manager: conda
   name: colorama
   optional: false
   platform: linux-64
-  url: https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.5-pyhd8ed1ab_0.tar.bz2
-  version: 0.4.5
+  url: https://conda.anaconda.org/conda-forge/noarch/colorama-0.4.6-pyhd8ed1ab_0.tar.bz2
+  version: 0.4.6
 - category: main
   dependencies:
     python: '>=3.6'
@@ -4278,14 +4278,14 @@ package:
     python: '>=3.7'
     tornado: '>=6.1.0'
   hash:
-    md5: e9a841f6e782edd1104211dbf8f4cfa9
-    sha256: b0c27fc3ecc1f3940d1ffa3a66273e1bd0b74dfe1af28e9b0625917e69d1ba29
+    md5: 57127b015e2f20aa5410666c58a07d61
+    sha256: 10c5c8f97ecd66c16c7af25d5b34bd9454c203d8c5175de88f3852b0065ceac3
   manager: conda
   name: terminado
   optional: false
   platform: linux-64
-  url: https://conda.anaconda.org/conda-forge/noarch/terminado-0.16.0-pyh41d4057_0.tar.bz2
-  version: 0.16.0
+  url: https://conda.anaconda.org/conda-forge/noarch/terminado-0.17.0-pyh41d4057_0.tar.bz2
+  version: 0.17.0
 - category: main
   dependencies:
     numpy: '>=1.13.3'
