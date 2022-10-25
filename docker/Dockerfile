@@ -1,40 +1,68 @@
-FROM coffeateam/coffea-dask:0.7.19-fastjet-3.3.4.0rc9-ge92ece7 as base
+FROM condaforge/mambaforge:4.11.0-0 as base
+# FROM coffeateam/coffea-dask:0.7.19-fastjet-3.3.4.0rc9-ge92ece7 as base
 
-# COPY environment.yml /docker/environment.yml
-# COPY conda-lock.yml /docker/conda-lock.yml
+SHELL [ "/bin/bash", "-c" ]
+
+ENV DEBIAN_FRONTEND="noninteractive"
+ENV TZ="Etc/UTC"
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends libarchive-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY environment-full.yml /docker/environment-full.yml
 COPY full.conda-lock.yml /docker/conda-lock.yml
 COPY requirements.lock /docker/requirements.lock
-# RUN mamba activate base && \
-#     mamba env update --file docker/conda-lock.yml
-# RUN mamba env update --file /docker/conda-lock.yml
-# RUN mamba install --yes conda-lock && \
-#     mamba update --yes urllib3 && \
-#     conda-lock --version && \
-#     conda-lock install \
-#         --mamba \
-#         /docker/conda-lock.yml
+COPY requirements.txt /docker/requirements.txt
 
-# RUN ls -lhtra /docker/conda-lock.yml && \
-#     mamba env update --file /docker/conda-lock.yml
-
-# RUN ls -lhtra /docker/conda-lock.yml && \
-#     mamba env update --file /docker/environment.yml && \
-#     mamba clean -y --all
-
-RUN mamba install --yes conda-lock && \
+# Need to manually source conda.sh for some reason, as `. /root/.bashrc` doesn't work?
+RUN . /opt/conda/etc/profile.d/conda.sh && \
+    mamba create --name lock && \
+    conda activate lock && \
+    mamba env list && \
+    mamba install --yes conda-lock && \
     conda-lock install --help && \
     conda-lock install \
         --mamba \
-        --name debug \
+        --name analysis-systems \
         /docker/conda-lock.yml && \
-    mamba activate debug && \
+    sed -i 's/conda activate base/conda activate analysis-systems/g' /root/.bashrc && \
+    conda activate analysis-systems && \
+    conda env remove --name lock && \
+    mamba env list && \
+    python -m pip --no-cache-dir install --upgrade pip && \
     python -m pip --no-cache-dir install \
         --no-deps \
         --require-hashes \
         --only-binary :all: \
-        --requirement /docker/requirements.lock
+        --no-binary torch-geometric \
+        --requirement /docker/requirements.lock && \
+    python -m pip --no-cache-dir install \
+        --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html \
+        torch-scatter \
+        torch-sparse \
+        torch-cluster \
+        torch-spline-conv
+
+# If need to split into two stages for debugging
+# RUN . /opt/conda/etc/profile.d/conda.sh && \
+#     conda activate analysis-systems && \
+#     conda env remove --name lock && \
+#     mamba env list && \
+#     python -m pip --no-cache-dir install --upgrade pip && \
+#     python -m pip --no-cache-dir install \
+#         --no-deps \
+#         --require-hashes \
+#         --only-binary :all: \
+#         --no-binary torch-geometric \
+#         --requirement /docker/requirements.lock && \
+#     python -m pip --no-cache-dir install \
+#         --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html \
+#         torch-scatter \
+#         torch-sparse \
+#         torch-cluster \
+#         torch-spline-conv
 
 # Make images Singularity compatible
 # Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
