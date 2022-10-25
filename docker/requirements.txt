@@ -1,0 +1,14 @@
+fastjet==3.3.4.0rc9
+func_adl==3.0
+--extra-index-url https://download.pytorch.org/whl/cpu/
+--extra-index-url https://google-coral.github.io/py-repo/
+tritonclient[all]
+torch
+tflite-runtime
+onnxruntime
+--find-links https://data.pyg.org/whl/torch-1.12.0+cpu.html
+torch-scatter
+torch-sparse
+torch-cluster
+torch-spline-conv
+torch-geometric
