@@ -18,6 +18,8 @@ def lock(session):
     """
     session.install("--upgrade", "conda-lock")
     session.run("docker", "pull", "python:3.8", external=True)
+    # At the moment this requires a manual intervention to add the hash
+    # from https://download.pytorch.org/whl/cpu/ for torch
     session.run(
         "docker",
         "run",
