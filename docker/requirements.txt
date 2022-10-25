@@ -1,3 +1,5 @@
+# Why is this needed in CoffeaTeam/docker-coffea-base?
+numpy<=1.22.0
 fastjet==3.3.4.0rc9
 func_adl==3.0
 --extra-index-url https://download.pytorch.org/whl/cpu/

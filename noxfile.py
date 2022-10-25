@@ -59,6 +59,9 @@ def lock(session):
     session.run(
         "cp", "docker/_requirements.lock", "docker/requirements.lock", external=True
     )
+    session.log("rm", "docker/_requirements.lock")
+    if (DIR / "docker" / "_requirements.lock").exists():
+        (DIR / "docker" / "_requirements.lock").unlink()
     session.run(
         "conda-lock",
         "lock",
