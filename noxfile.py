@@ -40,6 +40,9 @@ def lock(session):
     root_controlled_file = DIR / "docker" / "_requirements.lock"
     if root_controlled_file.exists():
         root_controlled_file.unlink()
+    # Name lockfile full.conda-lock.yml to avoid name conflicts while still
+    # retaining the required '.conda-lock.yml' name ending.
+    # TODO: Simplify environment and rename to just .conda-lock.yml.
     session.run(
         "conda-lock",
         "lock",
