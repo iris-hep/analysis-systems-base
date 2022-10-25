@@ -18,9 +18,6 @@ def lock(session):
     """
     session.install("--upgrade", "conda-lock")
     # session.run("pre-commit", "run", "--all-files", *session.posargs)
-    session.run("conda-lock", "--help")
-    session.run("conda-lock", "lock", "--help")
-    session.run("conda-lock", "install", "--help")
     # session.run(
     #     "conda-lock",
     #     "lock",
@@ -89,7 +86,7 @@ def build(session):
         "--tag",
         "iris-hep/analysis-systems-base:latest",
         "--tag",
-        "iris-hep/analysis-systems-base:2022-10-24",
+        "iris-hep/analysis-systems-base:2022-10-25",
         "docker",
         external=True,
     )
