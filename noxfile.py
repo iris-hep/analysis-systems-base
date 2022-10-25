@@ -1,5 +1,4 @@
-import shutil
-import sys
+from datetime import datetime
 from pathlib import Path
 
 import nox
@@ -62,6 +61,7 @@ def build(session):
     """
     Build image
     """
+    current_date = datetime.now().strftime("%Y-%m-%d")
     session.run(
         "docker",
         "build",
@@ -70,7 +70,7 @@ def build(session):
         "--tag",
         "iris-hep/analysis-systems-base:latest",
         "--tag",
-        "iris-hep/analysis-systems-base:2022-10-25",
+        f"iris-hep/analysis-systems-base:{current_date}",
         "docker",
         external=True,
     )
