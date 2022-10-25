@@ -27,10 +27,12 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
         --mamba \
         --name analysis-systems \
         /docker/conda-lock.yml && \
+    mamba clean --yes --all && \
     sed -i 's/conda activate base/conda activate analysis-systems/g' /root/.bashrc && \
     conda activate analysis-systems && \
     conda env remove --name lock && \
     mamba env list && \
+    mamba clean --yes --all && \
     python -m pip --no-cache-dir install --upgrade pip && \
     python -m pip --no-cache-dir install \
         --no-deps \
