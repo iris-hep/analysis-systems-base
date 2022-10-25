@@ -17,28 +17,6 @@ def lock(session):
     Build a lockfile for the image with conda-lock
     """
     session.install("--upgrade", "conda-lock")
-    # session.run("pre-commit", "run", "--all-files", *session.posargs)
-    # session.run(
-    #     "conda-lock",
-    #     "lock",
-    #     "--platform",
-    #     "linux-64",
-    #     "--file",
-    #     "docker/environment.yml",
-    #     "--lockfile",
-    #     "docker/conda-lock.yml",
-    # )
-    # session.run(
-    #     "conda-lock",
-    #     "lock",
-    #     "--platform",
-    #     "linux-64",
-    #     "--file",
-    #     "docker/old-environment.yml",
-    #     "--lockfile",
-    #     "docker/old-conda-lock.yml",
-    # )
-
     session.run("docker", "pull", "python:3.8", external=True)
     session.run(
         "docker",
@@ -57,8 +35,9 @@ def lock(session):
         "cp", "docker/_requirements.lock", "docker/requirements.lock", external=True
     )
     session.log("rm docker/_requirements.lock")
-    if (DIR / "docker" / "_requirements.lock").exists():
-        (DIR / "docker" / "_requirements.lock").unlink()
+    root_controlled_file = DIR / "docker" / "_requirements.lock"
+    if root_controlled_file.exists():
+        root_controlled_file.unlink()
     session.run(
         "conda-lock",
         "lock",
