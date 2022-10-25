@@ -1,0 +1,18 @@
+# Why is this needed in CoffeaTeam/docker-coffea-base?
+numpy<=1.22.0
+fastjet==3.3.4.0rc9
+func_adl==3.0
+--extra-index-url https://download.pytorch.org/whl/cpu/
+--extra-index-url https://google-coral.github.io/py-repo/
+tritonclient[all]
+# set the version for data.pyg.org --find-links
+torch==1.12.1
+tflite-runtime
+onnxruntime
+# Not a real index, so can't rely on hash discovery
+# --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html
+# torch-scatter
+# torch-sparse
+# torch-cluster
+# torch-spline-conv
+torch-geometric
