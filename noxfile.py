@@ -41,6 +41,24 @@ def lock(session):
     #     "--lockfile",
     #     "docker/old-conda-lock.yml",
     # )
+
+    session.run("docker", "pull", "python:3.8", external=True)
+    session.run(
+        "docker",
+        "run",
+        "--rm",
+        "-v",
+        f"{DIR}:/build",
+        "-w",
+        "/build",
+        "python:3.8",
+        "/bin/bash",
+        "docker/compile_dependencies.sh",
+        external=True,
+    )
+    session.run(
+        "cp", "docker/_requirements.lock", "docker/requirements.lock", external=True
+    )
     session.run(
         "conda-lock",
         "lock",
@@ -70,5 +88,5 @@ def build(session):
         "--tag",
         "iris-hep/analysis-systems-base:2022-10-24",
         "docker",
-        external=True
+        external=True,
     )
