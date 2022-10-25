@@ -12,6 +12,6 @@ fi
 cd docker
 pip-compile \
     --generate-hashes \
-    --find-links https://data.pyg.org/whl/torch-1.12.0+cpu.html \
+    --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html \
     --output-file _requirements.lock \
     requirements.txt
