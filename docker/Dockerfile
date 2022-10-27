@@ -12,14 +12,14 @@ COPY requirements.lock /docker/requirements.lock
 COPY requirements.txt /docker/requirements.txt
 
 RUN apt-get update && \
+    apt-get install -yq \
+        curl && \
     apt-get install -yq --no-install-recommends \
         make \
         cmake \
         git \
         bzip2 \
         libarchive-dev && \
-    apt-get install -yq \
-        curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     curl -sL micro.mamba.pm/install.sh | bash
