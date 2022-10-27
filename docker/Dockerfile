@@ -32,6 +32,7 @@ RUN . /root/.bashrc && \
         --name analysis-systems \
         /docker/conda-lock.yml && \
     micromamba clean --yes --all && \
+    echo 'export  PATH="/opt/micromamba/bin:${PATH}"' >> /root/.bashrc && \
     echo "micromamba activate analysis-systems" >> /root/.bashrc && \
     micromamba activate analysis-systems && \
     rm -rf /root/micromamba/envs/lock && \
