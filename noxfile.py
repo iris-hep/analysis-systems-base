@@ -104,3 +104,13 @@ def publish(session):
             f"hub.opensciencegrid.org/iris-hep/analysis-systems-base:{tag}",
             external=True,
         )
+
+
+@nox.session()
+def deploy(session):
+    """
+    Build, tag, and push to registry
+    """
+    session.notify("build")
+    session.notify("tag")
+    session.notify("publish")
