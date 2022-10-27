@@ -13,10 +13,12 @@ COPY requirements.txt /docker/requirements.txt
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
+        make \
+        cmake \
+        git \
         bzip2 \
         libarchive-dev && \
     apt-get install -yq \
-        git \
         curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
