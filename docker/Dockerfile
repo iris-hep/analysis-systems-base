@@ -14,8 +14,9 @@ COPY requirements.txt /docker/requirements.txt
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
         curl \
-        bzip2 \
         libarchive-dev && \
+    apt-get install -yq \
+        bzip2 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     curl -sL micro.mamba.pm/install.sh | bash
