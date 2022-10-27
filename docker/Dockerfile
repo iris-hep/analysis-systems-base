@@ -71,4 +71,5 @@ RUN . /root/.bashrc && \
 #         torch-spline-conv
 
 # Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
-RUN ln --symbolic /root/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
+RUN ln --symbolic /root/micromamba /opt/micromamba && \
+    ln --symbolic /root/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
