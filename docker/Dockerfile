@@ -10,18 +10,8 @@ COPY full.conda-lock.yml /docker/conda-lock.yml
 COPY requirements.lock /docker/requirements.lock
 COPY requirements.txt /docker/requirements.txt
 
-RUN yum update -y && \
-    yum install -y \
-      gcc \
-      gcc-c++ \
-      gcc-gfortran \
-      make \
-      zlib \
-      zlib-devel \
-      bzip2 \
-      bzip2-devel \
-      rsync \
-      git && \
+RUN yum install -y \
+      bzip2  && \
     yum clean all && \
     yum autoremove -y && \
     curl -sL micro.mamba.pm/install.sh | bash
@@ -42,6 +32,12 @@ RUN . /root/.bashrc && \
     micromamba activate analysis-systems && \
     rm -rf /root/micromamba/envs/lock && \
     micromamba env list && \
+    micromamba install \
+        --channel conda-forge \
+        --yes \
+            cmake \
+            gcc \
+            git  && \
     micromamba clean --yes --all && \
     python -m pip --no-cache-dir install --upgrade pip setuptools wheel && \
     python -m pip --no-cache-dir install \
