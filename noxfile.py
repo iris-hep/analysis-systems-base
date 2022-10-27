@@ -69,9 +69,9 @@ def build(session):
         "--file",
         "docker/Dockerfile",
         "--tag",
-        "iris-hep/analysis-systems-base:latest",
+        "hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest",
         "--tag",
-        f"iris-hep/analysis-systems-base:{current_date}",
+        f"hub.opensciencegrid.org/iris-hep/analysis-systems-base:{current_date}",
         "docker",
         external=True,
     )
@@ -82,11 +82,11 @@ def tag(session):
     """
     Tag images
     """
-    for tag in ["latest", datetime.now().strftime("%Y-%m-%d")]:
+    for tag in session.posargs:
         session.run(
             "docker",
             "tag",
-            f"iris-hep/analysis-systems-base:{tag}",
+            "hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest",
             f"hub.opensciencegrid.org/iris-hep/analysis-systems-base:{tag}",
             external=True,
         )
@@ -112,5 +112,4 @@ def deploy(session):
     Build, tag, and push to registry
     """
     session.notify("build")
-    session.notify("tag")
     session.notify("publish")
