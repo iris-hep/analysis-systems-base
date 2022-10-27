@@ -16,6 +16,7 @@ RUN apt-get update && \
         bzip2 \
         libarchive-dev && \
     apt-get install -yq \
+        git \
         curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
