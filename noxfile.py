@@ -69,9 +69,9 @@ def build(session):
         "--file",
         "docker/Dockerfile",
         "--tag",
-        "iris-hep/analysis-systems-base:latest",
+        "hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest",
         "--tag",
-        f"iris-hep/analysis-systems-base:{current_date}",
+        f"hub.opensciencegrid.org/iris-hep/analysis-systems-base:{current_date}",
         "docker",
         external=True,
     )
