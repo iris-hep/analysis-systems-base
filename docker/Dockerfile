@@ -70,7 +70,5 @@ RUN . /root/.bashrc && \
 #         torch-cluster \
 #         torch-spline-conv
 
-# Make images Singularity compatible
-# Make a symbolic link between installation /opt/conda/etc/grid-security and actual directory /etc/grid-security
-RUN mkdir -p /opt/conda && \
-    ln --symbolic /opt/conda/etc/grid-security /etc/grid-security
+# Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
+RUN ln --symbolic /root/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
