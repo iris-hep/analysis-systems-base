@@ -13,16 +13,15 @@ COPY requirements.txt /docker/requirements.txt
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
-        curl \
+        bzip2 \
         libarchive-dev && \
     apt-get install -yq \
-        bzip2 && \
+        curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     curl -sL micro.mamba.pm/install.sh | bash
 
-# Need to manually source conda.sh for some reason, as `. /root/.bashrc` doesn't work?
-RUN . /root/micromamba/etc/profile.d/micromamba.sh && \
+RUN . /root/.bashrc && \
     micromamba create --name lock && \
     micromamba activate lock && \
     micromamba env list && \
@@ -34,11 +33,11 @@ RUN . /root/micromamba/etc/profile.d/micromamba.sh && \
         /docker/conda-lock.yml && \
     micromamba clean --yes --all && \
     echo "micromamba activate analysis-systems" >> /root/.bashrc && \
-    conda activate analysis-systems && \
+    micromamba activate analysis-systems && \
     rm -rf /root/micromamba/envs/lock && \
     micromamba env list && \
     micromamba clean --yes --all && \
-    python -m pip --no-cache-dir install --upgrade pip && \
+    python -m pip --no-cache-dir install --upgrade pip setuptools wheel && \
     python -m pip --no-cache-dir install \
         --no-deps \
         --require-hashes \
