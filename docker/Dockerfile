@@ -14,9 +14,8 @@ RUN yum install -y \
       bzip2  && \
     yum clean all && \
     yum autoremove -y && \
-    curl -sL micro.mamba.pm/install.sh | bash
-
-RUN . /root/.bashrc && \
+    curl -sL micro.mamba.pm/install.sh | bash && \
+    . /root/.bashrc && \
     micromamba create --name lock && \
     micromamba activate lock && \
     micromamba env list && \
