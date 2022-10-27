@@ -62,6 +62,7 @@ def build(session):
     Build image
     """
     current_date = datetime.now().strftime("%Y-%m-%d")
+    session.run("docker", "pull", "debian:bullseye-slim", external=True)
     session.run(
         "docker",
         "build",
