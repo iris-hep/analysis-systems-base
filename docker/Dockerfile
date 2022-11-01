@@ -77,6 +77,7 @@ RUN yum install -y \
 # Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
 # Ensure ENTRYPOINT is executable
 RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
+    sed -i '1s|^|#!/bin/bash\n|' /etc/.bashrc && \
     chmod +x /etc/.bashrc
 
 ENTRYPOINT [ "/etc/.bashrc" ]
