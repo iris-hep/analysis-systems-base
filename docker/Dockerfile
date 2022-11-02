@@ -87,6 +87,8 @@ RUN yum install -y \
 RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
     mkdir -p /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
+    mkdir -p /.local && \
+    chmod 777 /.local && \
     echo "# image build date: $(date)" > /docker/build_date.txt
 
 # Run with login shell to trigger /etc/profile
