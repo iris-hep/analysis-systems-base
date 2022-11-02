@@ -50,5 +50,5 @@ docker run \
     --rm \
     -ti \
     --publish 8888:8888 \
-    hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest
+    hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest --
 ```
