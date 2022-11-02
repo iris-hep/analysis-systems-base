@@ -106,3 +106,5 @@ WORKDIR /work
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
 ENTRYPOINT ["/bin/bash", "-l"]
+
+CMD ["/docker/entrypoint.sh"]
