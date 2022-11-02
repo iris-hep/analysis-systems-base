@@ -81,12 +81,13 @@ RUN yum install -y \
 #         torch-cluster \
 #         torch-spline-conv
 
-# Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
-RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
-
-# Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
-RUN mkdir -p /u0b/software/jupyter/kernels && \
-    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems
+# * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
+# * Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
+# * Add build date file to easily check if analysis facilities have synced images
+RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
+    mkdir -p /u0b/software/jupyter/kernels && \
+    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
+    echo "# image build date: $(date)" > /docker/build_date.txt
 
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
