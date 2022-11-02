@@ -14,9 +14,13 @@ RUN yum install -y \
       bzip2  && \
     yum clean all && \
     yum autoremove -y && \
+    cp /root/.bashrc /etc/.bashrc.bak && \
     curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C /usr/local/bin/ --strip-components=1 bin/micromamba && \
-    /usr/local/bin/micromamba shell init -p /opt/micromamba && \
-    . /root/.bashrc && \
+    micromamba shell init --prefix /opt/micromamba --shell bash && \
+    /usr/local/bin/micromamba shell init --prefix /opt/micromamba && \
+    diff /root/.bashrc /etc/.bashrc.bak | grep "< " | cut -c 3- >> /etc/.bashrc && \
+    mv /etc/.bashrc.bak /root/.bashrc && \
+    . /etc/.bashrc && \
     micromamba create --name lock && \
     micromamba activate lock && \
     micromamba env list && \
@@ -27,10 +31,10 @@ RUN yum install -y \
         --name analysis-systems \
         /docker/conda-lock.yml && \
     micromamba clean --yes --all && \
-    echo 'export  PATH="/opt/micromamba/bin:${PATH}"' >> /root/.bashrc && \
-    echo "micromamba activate analysis-systems" >> /root/.bashrc && \
-    cp /root/.bashrc /etc/bashrc && \
-    cat /root/.bashrc >> /etc/profile && \
+    echo 'export  PATH="/opt/micromamba/bin:${PATH}"' >> /etc/.bashrc && \
+    echo "micromamba activate analysis-systems" >> /etc/.bashrc && \
+    echo 'if [ -f /etc/.bashrc ]; then . /etc/.bashrc; fi' >> /etc/profile && \
+    . /etc/.bashrc && \
     micromamba activate analysis-systems && \
     rm -rf /opt/micromamba/envs/lock && \
     micromamba env list && \
