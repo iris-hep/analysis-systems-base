@@ -102,6 +102,8 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     echo "# image build date: $(date)" > /docker/build_date.txt
 
 WORKDIR /work
+# Ensure HOME exists and that it is writeable
+ENV HOME=/work
 
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
