@@ -14,8 +14,11 @@ RUN yum install -y \
       bzip2  && \
     yum clean all && \
     yum autoremove -y && \
-    curl -sL micro.mamba.pm/install.sh | bash && \
-    . /root/.bashrc && \
+    curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C /usr/local/bin/ --strip-components=1 bin/micromamba && \
+    micromamba shell init --prefix /opt/micromamba --shell bash && \
+    /usr/local/bin/micromamba shell init --prefix /opt/micromamba && \
+    cp /root/.bashrc /etc/.bashrc && \
+    . /etc/.bashrc && \
     micromamba create --name lock && \
     micromamba activate lock && \
     micromamba env list && \
@@ -26,10 +29,12 @@ RUN yum install -y \
         --name analysis-systems \
         /docker/conda-lock.yml && \
     micromamba clean --yes --all && \
-    echo 'export  PATH="/opt/micromamba/bin:${PATH}"' >> /root/.bashrc && \
-    echo "micromamba activate analysis-systems" >> /root/.bashrc && \
+    echo 'export  PATH="/opt/micromamba/bin:${PATH}"' >> /etc/.bashrc && \
+    echo "micromamba activate analysis-systems" >> /etc/.bashrc && \
+    echo 'if [ -f /etc/.bashrc ]; then . /etc/.bashrc; fi' >> /etc/profile && \
+    . /etc/.bashrc && \
     micromamba activate analysis-systems && \
-    rm -rf /root/micromamba/envs/lock && \
+    rm -rf /opt/micromamba/envs/lock && \
     micromamba env list && \
     micromamba install \
         --channel conda-forge \
@@ -50,7 +55,8 @@ RUN yum install -y \
         torch-scatter \
         torch-sparse \
         torch-cluster \
-        torch-spline-conv
+        torch-spline-conv && \
+    rm -rf /root/*
 
 # If need to split into two stages for debugging
 # RUN . /opt/conda/etc/profile.d/conda.sh && \
@@ -72,5 +78,8 @@ RUN yum install -y \
 #         torch-spline-conv
 
 # Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
-RUN ln --symbolic /root/micromamba /opt/micromamba && \
-    ln --symbolic /root/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
+RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
+
+# Run with login shell to trigger /etc/profile
+# c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
+ENTRYPOINT ["/bin/bash", "-l"]
