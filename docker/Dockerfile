@@ -89,7 +89,15 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
     mkdir -p /.local && \
     chmod 777 /.local && \
+    mkdir -p /.jupyter && \
+    chmod 777 /.jupyter && \
+    mkdir -p /.config && \
+    chmod 777 /.config && \
+    mkdir -p /work && \
+    chmod 777 /work && \
     echo "# image build date: $(date)" > /docker/build_date.txt
+
+WORKDIR /work
 
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
