@@ -93,6 +93,8 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     chmod 777 /.jupyter && \
     mkdir -p /.config && \
     chmod 777 /.config && \
+    mkdir -p /.cache && \
+    chmod 777 /.cache && \
     mkdir -p /work && \
     chmod 777 /work && \
     echo "# image build date: $(date)" > /docker/build_date.txt
