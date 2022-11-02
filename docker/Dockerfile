@@ -85,8 +85,8 @@ RUN yum install -y \
 RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
 
 # Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
-RUN mkdir -p /u0b/software/jupyter && \
-    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels /u0b/software/jupyter/kernels
+RUN mkdir -p /u0b/software/jupyter/kernels && \
+    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems
 
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
