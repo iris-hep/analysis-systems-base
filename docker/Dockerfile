@@ -56,6 +56,10 @@ RUN yum install -y \
         torch-sparse \
         torch-cluster \
         torch-spline-conv && \
+    python -m ipykernel install \
+        --name="analysis-systems" \
+        --display-name="Analysis Systems" \
+        --sys-prefix && \
     rm -rf /root/*
 
 # If need to split into two stages for debugging
