@@ -84,6 +84,10 @@ RUN yum install -y \
 # Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
 RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
 
+# Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
+RUN mkdir -p /u0b/software/jupyter && \
+    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels /u0b/software/jupyter/kernels
+
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
 ENTRYPOINT ["/bin/bash", "-l"]
