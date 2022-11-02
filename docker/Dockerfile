@@ -97,6 +97,8 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     chmod 777 /.cache && \
     mkdir -p /work && \
     chmod 777 /work && \
+    printf '#!/bin/bash\n\njupyter lab --no-browser --ip 0.0.0.0 --port 8888\n' > /docker/entrypoint.sh && \
+    chmod 777 /docker/entrypoint.sh && \
     echo "# image build date: $(date)" > /docker/build_date.txt
 
 WORKDIR /work
