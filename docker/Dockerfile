@@ -16,8 +16,7 @@ RUN yum install -y \
     yum autoremove -y && \
     curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C /usr/local/bin/ --strip-components=1 bin/micromamba && \
     /usr/local/bin/micromamba shell init -p /opt/micromamba && \
-    cp /root/.bashrc /etc/.bashrc && \
-    . /etc/.bashrc && \
+    . /root/.bashrc && \
     micromamba create --name lock && \
     micromamba activate lock && \
     micromamba env list && \
@@ -30,7 +29,8 @@ RUN yum install -y \
     micromamba clean --yes --all && \
     echo 'export  PATH="/opt/micromamba/bin:${PATH}"' >> /root/.bashrc && \
     echo "micromamba activate analysis-systems" >> /root/.bashrc && \
-    cp /root/.bashrc /etc/.bashrc && \
+    cp /root/.bashrc /etc/bashrc && \
+    cat /root/.bashrc >> /etc/profile && \
     micromamba activate analysis-systems && \
     rm -rf /opt/micromamba/envs/lock && \
     micromamba env list && \
@@ -74,7 +74,8 @@ RUN yum install -y \
 #         torch-cluster \
 #         torch-spline-conv
 
-COPY entrypoint.sh /docker/entrypoint.sh
 # Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
-RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
-    chmod +x /docker/entrypoint.sh
+RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
+
+# Run with login shell to trigger /etc/profile
+ENTRYPOINT ["/bin/bash", "-l"]
