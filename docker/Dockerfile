@@ -14,12 +14,10 @@ RUN yum install -y \
       bzip2  && \
     yum clean all && \
     yum autoremove -y && \
-    cp /root/.bashrc /etc/.bashrc.bak && \
     curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C /usr/local/bin/ --strip-components=1 bin/micromamba && \
     micromamba shell init --prefix /opt/micromamba --shell bash && \
     /usr/local/bin/micromamba shell init --prefix /opt/micromamba && \
-    diff /root/.bashrc /etc/.bashrc.bak | grep "< " | cut -c 3- >> /etc/.bashrc && \
-    mv /etc/.bashrc.bak /root/.bashrc && \
+    cp /root/.bashrc /etc/.bashrc && \
     . /etc/.bashrc && \
     micromamba create --name lock && \
     micromamba activate lock && \
@@ -57,7 +55,8 @@ RUN yum install -y \
         torch-scatter \
         torch-sparse \
         torch-cluster \
-        torch-spline-conv
+        torch-spline-conv && \
+    rm -rf /root/*
 
 # If need to split into two stages for debugging
 # RUN . /opt/conda/etc/profile.d/conda.sh && \
