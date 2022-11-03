@@ -83,20 +83,25 @@ RUN yum install -y \
 
 # * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
 # * Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
+# * Ensure default directories and that they are writeable by arbitrary user
+# * Set defaults for jupyter lab
+# * Set JUPYTER_PATH and JUPYTER_DATA_DIR
 # * Add build date file to easily check if analysis facilities have synced images
 RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
     mkdir -p /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
-    mkdir -p /.local && \
-    chmod 777 /.local && \
-    mkdir -p /.jupyter && \
-    chmod 777 /.jupyter && \
-    mkdir -p /.config && \
-    chmod 777 /.config && \
-    mkdir -p /.cache && \
-    chmod 777 /.cache && \
-    mkdir -p /work && \
-    chmod 777 /work && \
+    mkdir -p \
+        /.local \
+        /.jupyter \
+        /.config \
+        /.cache \
+        /work && \
+    chmod 777 \
+        /.local \
+        /.jupyter \
+        /.config \
+        /.cache \
+        /work && \
     printf '#!/bin/bash\n\njupyter lab --no-browser --ip 0.0.0.0 --port 8888\n' > /docker/entrypoint.sh && \
     chmod 777 /docker/entrypoint.sh && \
     echo 'export JUPYTER_PATH="/opt/micromamba/envs/analysis-systems/share/jupyter:${JUPYTER_PATH}"' >> /etc/.bashrc && \
