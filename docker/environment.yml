@@ -36,6 +36,11 @@ dependencies:
   - tini
   - jupyter-server-proxy
   - htcondor ==9.2.0
+  # coffea[servicex]
+  - aiostream
+  - tenacity
+  - servicex==2.5.4
+  - func-adl-servicex==2.0
   # IRIS-HEP Analysis Systems
   - awkward ==1.10.1
   - uproot ==4.3.7
