@@ -19,6 +19,7 @@ RUN yum install -y \
     /usr/local/bin/micromamba shell init --prefix /opt/micromamba && \
     cp /root/.bashrc /etc/.bashrc && \
     . /etc/.bashrc && \
+    chmod -R 777 /opt/micromamba/envs && \
     micromamba create --name lock && \
     micromamba activate lock && \
     micromamba env list && \
