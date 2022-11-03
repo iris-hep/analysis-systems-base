@@ -108,6 +108,8 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     echo 'export JUPYTER_PATH="/opt/micromamba/envs/analysis-systems/share/jupyter:${JUPYTER_PATH}"' >> /etc/.bashrc && \
     echo 'export JUPYTER_DATA_DIR="/opt/micromamba/envs/analysis-systems/share/jupyter"' >> /etc/.bashrc && \
     chmod 777 /opt/micromamba/envs/analysis-systems/share/jupyter && \
+    mkdir -p /.local/share/jupyter/kernels && \
+    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /.local/share/jupyter/kernels && \
     echo "# image build date: $(date)" > /docker/build_date.txt
 
 WORKDIR /work
