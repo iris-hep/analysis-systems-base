@@ -56,6 +56,10 @@ RUN yum install -y \
         torch-sparse \
         torch-cluster \
         torch-spline-conv && \
+    python -m ipykernel install \
+        --name="analysis-systems" \
+        --display-name="Analysis Systems" \
+        --sys-prefix && \
     rm -rf /root/*
 
 # If need to split into two stages for debugging
@@ -77,9 +81,40 @@ RUN yum install -y \
 #         torch-cluster \
 #         torch-spline-conv
 
-# Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
-RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security
+# * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
+# * Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
+# * Ensure default directories and that they are writeable by arbitrary user
+# * Set defaults for jupyter lab
+# * Set JUPYTER_PATH and JUPYTER_DATA_DIR
+# * Add build date file to easily check if analysis facilities have synced images
+RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
+    mkdir -p /u0b/software/jupyter/kernels && \
+    ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
+    mkdir -p \
+        /.local \
+        /.jupyter \
+        /.config \
+        /.cache \
+        /work && \
+    chmod 777 \
+        /.local \
+        /.jupyter \
+        /.config \
+        /.cache \
+        /work && \
+    printf '#!/bin/bash\n\njupyter lab --no-browser --ip 0.0.0.0 --port 8888\n' > /docker/entrypoint.sh && \
+    chmod 777 /docker/entrypoint.sh && \
+    echo 'export JUPYTER_PATH="/opt/micromamba/envs/analysis-systems/share/jupyter:${JUPYTER_PATH}"' >> /etc/.bashrc && \
+    echo 'export JUPYTER_DATA_DIR="/opt/micromamba/envs/analysis-systems/share/jupyter"' >> /etc/.bashrc && \
+    chmod 777 /opt/micromamba/envs/analysis-systems/share/jupyter && \
+    echo "# image build date: $(date)" > /docker/build_date.txt
+
+WORKDIR /work
+# Ensure HOME exists and that it is writeable
+ENV HOME=/work
 
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
 ENTRYPOINT ["/bin/bash", "-l"]
+
+CMD ["/docker/entrypoint.sh"]
