@@ -47,7 +47,6 @@ dependencies:
   - vector==0.10.0
   - pyhf==0.7.0
   - iminuit==2.17.0
-  - matplotlib==3.6.2
   - cabinetry==0.5.1
   - mplhep==0.3.26
   - pip >=22.3
