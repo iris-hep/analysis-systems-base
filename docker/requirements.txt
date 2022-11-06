@@ -6,6 +6,7 @@ fastjet==3.3.4.0rc9
 servicex==2.5.4
 func-adl-servicex==2.1
 func-adl==3.1
+servicex-databinder==0.2.10
 --extra-index-url https://download.pytorch.org/whl/cpu/
 --extra-index-url https://google-coral.github.io/py-repo/
 tritonclient[all]
