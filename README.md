@@ -1,10 +1,22 @@
 # analysis-systems-base
 Base Docker image for Analysis Systems environment
 
-## Get image
+## Get Image
+
+### Open Science Grid Harbor registry
+
+The images are stored on the [Harbor image registry](https://hub.opensciencegrid.org/harbor/)
 
 ```
 docker pull hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest
+```
+
+### CVMFS Unpacked
+
+The images are also available through CVMFS unpacked and are available on CVMFS instances under the path
+
+```
+/cvmfs/unpacked.cern.ch/hub.opensciencegrid.org/iris-hep/analysis-systems-base:<tag>
 ```
 
 ## Usage
