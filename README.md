@@ -13,7 +13,7 @@ docker pull hub.opensciencegrid.org/iris-hep/analysis-systems-base:latest
 
 ### CVMFS Unpacked
 
-The images are also available through CVMFS unpacked and is available on CVMFS instances under the path
+The images are also available through CVMFS unpacked and are available on CVMFS instances under the path
 
 ```
 /cvmfs/unpacked.cern.ch/hub.opensciencegrid.org/iris-hep/analysis-systems-base:<tag>
