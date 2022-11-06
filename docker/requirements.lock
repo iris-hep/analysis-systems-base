@@ -161,7 +161,9 @@ awkward==1.10.1 \
 backoff==2.2.1 \
     --hash=sha256:03f829f5bb1923180821643f8753b0502c3b682293992485b0eef2807afa5cba \
     --hash=sha256:63579f9a0628e06278f7e47b7d7d5b6ce20dc65c5e96a6f3ca99a6adca0396e8
-    # via servicex
+    # via
+    #   servicex
+    #   servicex-databinder
 brotli==1.0.9 \
     --hash=sha256:12effe280b8ebfd389022aa65114e30407540ccb89b177d3fbc9a4f177c4bd5d \
     --hash=sha256:160c78292e98d21e73a4cc7f76a234390e516afcd982fa17e1422f7c6a9ce9c8 \
@@ -338,7 +340,9 @@ func-adl==3.1 \
 func-adl-servicex==2.1 \
     --hash=sha256:3e92a1c9cd79aa7140c86b1ca65b09ac77010284afd5d40b0eeb39b8ad3c77bb \
     --hash=sha256:7311b76d5e5a624b18a93ffa3dff1b98ad9207106c409d8dab842cf2cc2a863e
-    # via -r requirements.txt
+    # via
+    #   -r requirements.txt
+    #   servicex-databinder
 gevent==22.10.2 \
     --hash=sha256:018f93de7d5318d2fb440f846839a4464738468c3476d5c9cf7da45bb71c18bd \
     --hash=sha256:0d581f22a5be6281b11ad6309b38b18f0638cf896931223cbaa5adb904826ef6 \
@@ -727,6 +731,10 @@ multidict==6.0.2 \
     # via
     #   aiohttp
     #   yarl
+nest-asyncio==1.5.6 \
+    --hash=sha256:b9a953fb40dceaa587d109609098db21900182b16440652454a146cffb06e8b8 \
+    --hash=sha256:d267cc1ff794403f7df692964d1d2a3fa9418ffea2a3f6859a439ff482fef290
+    # via servicex-databinder
 numpy==1.21.6 \
     --hash=sha256:1dbe1c91269f880e364526649a52eff93ac30035507ae980d2fed33aaee633ac \
     --hash=sha256:357768c2e4451ac241465157a3e929b265dfac85d9214074985b1786244f2ef3 \
@@ -894,7 +902,9 @@ pyarrow==10.0.0 \
     --hash=sha256:e4c6da9f9e1ff96781ee1478f7cc0860e66c23584887b8e297c4b9905c3c9066 \
     --hash=sha256:f329951d56b3b943c353f7b27c894e02367a7efbb9fef7979c6b24e02dbfcf55 \
     --hash=sha256:f76157d9579571c865860e5fd004537c03e21139db76692d96fd8a186adab1f2
-    # via servicex
+    # via
+    #   servicex
+    #   servicex-databinder
 pyasn1==0.4.8 \
     --hash=sha256:39c7e2ec30515947ff4e87fb6f456dfc6e84857d34be479c9d4a4ba4bf46aa5d \
     --hash=sha256:aef77c9fb94a3ac588e87841208bdec464471d9871bd5050a287cc9a475cd0ba
@@ -1019,6 +1029,7 @@ qastle==0.16.0 \
     # via
     #   func-adl-servicex
     #   servicex
+    #   tcut-to-qastle
 requests==2.28.1 \
     --hash=sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983 \
     --hash=sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349
@@ -1081,6 +1092,11 @@ servicex==2.5.4 \
     # via
     #   -r requirements.txt
     #   func-adl-servicex
+    #   servicex-databinder
+servicex-databinder==0.2.10 \
+    --hash=sha256:0b69e2bc5c100d88e306a9c37d2033b0792d9498c8d047fbb1aab7f8c8a94f23 \
+    --hash=sha256:8c02568a559e050fd545c35ac7e7982e8f154eb363b085eb6e4835fe215c2e19
+    # via -r requirements.txt
 six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
@@ -1093,6 +1109,10 @@ sympy==1.11.1 \
     --hash=sha256:938f984ee2b1e8eae8a07b884c8b7a1146010040fccddc6539c54f401c8f6fcf \
     --hash=sha256:e32380dce63cb7c0108ed525570092fd45168bdae2faa17e528221ef72e88658
     # via onnxruntime
+tcut-to-qastle==0.7 \
+    --hash=sha256:6cb1b370f6f17550f6d53a9be9675c46da84ac9dc1918a64aacfdfc3bd51fd93 \
+    --hash=sha256:b295d62a6a7501bbb76a94a432d28a0cb245258aed404d50f18be8326af9bcc5
+    # via servicex-databinder
 tflite-runtime==2.10.0 \
     --hash=sha256:32ecaa9cc10d3807218c9202df7e022e2182b0dd3cf69dc097551fbd85ca5735 \
     --hash=sha256:351391fc467b872f4ed306af375bad98728082b93dae0631f20f40da71bc9b69 \
@@ -1139,6 +1159,7 @@ tqdm==4.64.1 \
     --hash=sha256:6fee160d6ffcd1b1c68c65f14c829c22832bc401726335ce92c52d395944a6a1
     # via
     #   servicex
+    #   servicex-databinder
     #   torch-geometric
 tritonclient[all]==2.27.0 \
     --hash=sha256:2c7eb48090d2f1cc480681edbf88ff3fbbe76305de851dfffa6cdd8dfa94e9f1 \
