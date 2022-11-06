@@ -2,9 +2,9 @@ name: base
 channels:
   - conda-forge
 dependencies:
-  - python ==3.8.*
+  - python==3.8.*
   # base image
-  - xrootd ==5.4.0
+  - xrootd==5.4.0
   - conda-build
   - voms
   - jupyterlab
@@ -25,15 +25,15 @@ dependencies:
   - python-blosc
   - cytoolz
   - bokeh
-  - dask ==2022.9.2
-  - distributed ==2022.9.2
-  - dask-gateway ==0.9.0
+  - dask==2022.9.2
+  - distributed==2022.9.2
+  - dask-gateway==0.9.0
   - dask-jobqueue
   - nomkl
-  - scipy ==1.5.3
+  - scipy==1.5.3
   - tini
   - jupyter-server-proxy
-  - htcondor ==9.2.0
+  - htcondor==9.2.0
   # coffea[servicex] components available on conda-forge
   - aiostream
   - tenacity
@@ -41,13 +41,13 @@ dependencies:
   - nodejs
   - jupyterlab-github
   # IRIS-HEP Analysis Systems
-  - awkward ==1.10.1
-  - uproot ==4.3.7
-  - hist ==2.6.2
-  - vector ==0.10.0
-  - pyhf ==0.7.0
-  - iminuit ==2.17.0
-  - matplotlib ==3.6.1
-  - cabinetry ==0.5.0
-  - mplhep ==0.3.26
+  - awkward==1.10.1
+  - uproot==4.3.7
+  - hist==2.6.2
+  - vector==0.10.0
+  - pyhf==0.7.0
+  - iminuit==2.17.0
+  - matplotlib==3.6.1
+  - cabinetry==0.5.0
+  - mplhep==0.3.26
   - pip >=22.3
