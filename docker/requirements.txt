@@ -1,10 +1,11 @@
-# Why is this needed in CoffeaTeam/docker-coffea-base?
-numpy<=1.22.0
+# numpy restricted by coffea until Python 3.6 support is dropped as conda-forge
+# doesn't know how to do Python version specific dependencies
+numpy<1.22
 fastjet==3.3.4.0rc9
 # coffea[servicex] components not on conda-forge
 servicex==2.5.4
-func-adl-servicex==2.0
-func_adl==3.0
+func-adl-servicex==2.1
+func-adl==3.1
 --extra-index-url https://download.pytorch.org/whl/cpu/
 --extra-index-url https://google-coral.github.io/py-repo/
 tritonclient[all]

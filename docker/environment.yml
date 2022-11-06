@@ -11,9 +11,7 @@ dependencies:
   - ipympl
   - dask_labextension
   - ca-policy-lcg
-  # Why is this needed in CoffeaTeam/docker-coffea-base?
-  - numpy <=1.22.0
-  - coffea ==0.7.19
+  - coffea==0.7.20
   - xgboost
   - lz4
   - python-xxhash
@@ -53,6 +51,3 @@ dependencies:
   - cabinetry ==0.5.0
   - mplhep ==0.3.26
   - pip >=22.3
-  - pip:
-    - fastjet==3.3.4.0rc9
-    - func_adl==3.0
