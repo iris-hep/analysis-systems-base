@@ -14,46 +14,65 @@ DIR = Path(__file__).parent.resolve()
 def lock(session):
     """
     Build a lockfile for the image with conda-lock
+
+    Examples:
+
+        $ nox --session lock
+        $ nox --session lock -- pip-tools  # Only build the pip-tools lock file
+        $ nox --session lock -- conda-lock  # Only build the conda-lock lock file
     """
     session.install("--upgrade", "conda-lock")
-    session.run("docker", "pull", "python:3.8", external=True)
-    # At the moment this requires a manual intervention to add the hash
-    # from https://download.pytorch.org/whl/cpu/ for torch
-    session.run(
-        "docker",
-        "run",
-        "--rm",
-        "-v",
-        f"{DIR}:/build",
-        "-w",
-        "/build",
-        "python:3.8",
-        "/bin/bash",
-        "docker/compile_dependencies.sh",
-        external=True,
-    )
-    session.run(
-        "cp", "docker/_requirements.lock", "docker/requirements.lock", external=True
-    )
-    session.log("rm docker/_requirements.lock")
-    root_controlled_file = DIR / "docker" / "_requirements.lock"
-    if root_controlled_file.exists():
-        root_controlled_file.unlink()
-    # Name lockfile full.conda-lock.yml to avoid name conflicts while still
-    # retaining the required '.conda-lock.yml' name ending.
-    # TODO: Simplify environment and rename to just .conda-lock.yml.
-    session.run(
-        "conda-lock",
-        "lock",
-        "--platform",
-        "linux-64",
-        "--file",
-        "docker/environment.yml",
-        "--kind",
-        "lock",
-        "--lockfile",
-        "docker/full.conda-lock.yml",
-    )
+
+    lock_pip_tools = False
+    lock_conda_lock = False
+    if not session.posargs:
+        lock_pip_tools = True
+        lock_conda_lock = True
+    if "pip-tools" in session.posargs:
+        lock_pip_tools = True
+    if "conda-lock" in session.posargs:
+        lock_conda_lock = True
+
+    if lock_pip_tools:
+        session.run("docker", "pull", "python:3.8", external=True)
+        # At the moment this requires a manual intervention to add the hash
+        # from https://download.pytorch.org/whl/cpu/ for torch
+        session.run(
+            "docker",
+            "run",
+            "--rm",
+            "-v",
+            f"{DIR}:/build",
+            "-w",
+            "/build",
+            "python:3.8",
+            "/bin/bash",
+            "docker/compile_dependencies.sh",
+            external=True,
+        )
+        session.run(
+            "cp", "docker/_requirements.lock", "docker/requirements.lock", external=True
+        )
+        session.log("rm docker/_requirements.lock")
+        root_controlled_file = DIR / "docker" / "_requirements.lock"
+        if root_controlled_file.exists():
+            root_controlled_file.unlink()
+    if lock_conda_lock:
+        # Name lockfile full.conda-lock.yml to avoid name conflicts while still
+        # retaining the required '.conda-lock.yml' name ending.
+        # TODO: Simplify environment and rename to just .conda-lock.yml.
+        session.run(
+            "conda-lock",
+            "lock",
+            "--platform",
+            "linux-64",
+            "--file",
+            "docker/environment.yml",
+            "--kind",
+            "lock",
+            "--lockfile",
+            "docker/full.conda-lock.yml",
+        )
 
 
 @nox.session()
