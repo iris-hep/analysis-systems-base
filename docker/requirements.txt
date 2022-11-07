@@ -1,7 +1,7 @@
 # numpy restricted by coffea until Python 3.6 support is dropped as conda-forge
 # doesn't know how to do Python version specific dependencies
 numpy<1.22
-fastjet==3.4.0.0rc2
+fastjet==3.4.0.0
 # coffea[servicex] components not on conda-forge
 servicex==2.5.4
 func-adl-servicex==2.1
