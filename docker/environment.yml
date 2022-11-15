@@ -30,7 +30,7 @@ dependencies:
   - dask-gateway==0.9.0
   - dask-jobqueue
   - nomkl
-  - scipy==1.5.3
+  - scipy
   - tini
   - jupyter-server-proxy
   - htcondor==9.2.0
