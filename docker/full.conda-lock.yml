@@ -15,7 +15,7 @@ metadata:
   - url: conda-forge
     used_env_vars: []
   content_hash:
-    linux-64: 855c8d2b4525c0409f8d17bbc0c50383b5894ac02e79b656276b2e987ad34cc1
+    linux-64: 05f63f55a3e7af88774f4099b41b825711f7f113afba6e558ec32c241d3b7236
   platforms:
   - linux-64
   sources:
@@ -4423,25 +4423,25 @@ package:
   version: 12.6.0
 - category: main
   dependencies:
-    libblas: '>=3.8.0,<4.0a0'
-    libcblas: '>=3.8.0,<4.0a0'
-    libgcc-ng: '>=9.3.0'
+    libblas: '>=3.9.0,<4.0a0'
+    libcblas: '>=3.9.0,<4.0a0'
+    libgcc-ng: '>=12'
     libgfortran-ng: ''
-    libgfortran5: '>=9.3.0'
-    liblapack: '>=3.8.0,<4.0a0'
-    libstdcxx-ng: '>=9.3.0'
-    numpy: '>=1.16.5,<2.0a0'
+    libgfortran5: '>=10.4.0'
+    liblapack: '>=3.9.0,<4.0a0'
+    libstdcxx-ng: '>=12'
+    numpy: '>=1.20.3,<2.0a0'
     python: '>=3.8,<3.9.0a0'
     python_abi: 3.8.* *_cp38
   hash:
-    md5: e0ab8ace182b8d88a43c7e25a3ed092f
-    sha256: ad07423f6c3b67d9fc1ccaf1b81bbb8fc64090b1b6eff85d0f0b09a28f03c6e4
+    md5: dfd81898f0c6e9ee0c22305da6aa443e
+    sha256: 3f73bcd37217ca412c5c5ce40c0f1ba2eae0ff95eac940dbdcbfedaf965bd12d
   manager: conda
   name: scipy
   optional: false
   platform: linux-64
-  url: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.5.3-py38hb2138dd_0.tar.bz2
-  version: 1.5.3
+  url: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.9.3-py38h8ce737c_2.tar.bz2
+  version: 1.9.3
 - category: main
   dependencies:
     libgcc-ng: '>=12'
