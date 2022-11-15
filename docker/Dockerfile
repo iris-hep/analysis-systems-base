@@ -50,6 +50,7 @@ RUN yum install -y \
         --require-hashes \
         --only-binary :all: \
         --no-binary torch-geometric \
+        --use-pep517 \
         --requirement /docker/requirements.lock && \
     python -m pip --no-cache-dir install \
         --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html \
