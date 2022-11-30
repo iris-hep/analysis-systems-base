@@ -12,8 +12,6 @@ COPY requirements.txt /docker/requirements.txt
 
 RUN yum install -y \
       bzip2  && \
-    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el7.noarch.rpm && \
-    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/el7/x86_64/release/condor-9.0.17-1.el7.x86_64.rpm && \
     yum clean all && \
     yum autoremove -y && \
     curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C /usr/local/bin/ --strip-components=1 bin/micromamba && \
