@@ -107,7 +107,7 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
         /.config \
         /.cache \
         /work && \
-    chmod -R 777 \
+    chmod 777 \
         /.local \
         /.jupyter \
         /.config \
