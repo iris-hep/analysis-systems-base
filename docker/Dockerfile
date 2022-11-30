@@ -124,6 +124,12 @@ WORKDIR /work
 # Ensure HOME exists and that it is writeable
 ENV HOME=/work
 
+# Set Jupyter Lab defaults
+RUN . /etc/.bashrc && \
+    micromamba activate analysis-systems && \
+    jupyter lab --generate-config && \
+    sed -i 's|# c.ServerApp.terminado_settings = {}|c.ServerApp.terminado_settings = { "shell_command": ["/usr/bin/bash"] }|g' "${HOME}/.jupyter/jupyter_lab_config.py"
+
 # Run with login shell to trigger /etc/profile
 # c.f. https://youngstone89.medium.com/unix-introduction-bash-startup-files-loading-order-562543ac12e9
 ENTRYPOINT ["/bin/bash", "-l"]
