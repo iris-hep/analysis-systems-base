@@ -35,7 +35,7 @@ RUN yum install -y \
     . /etc/.bashrc && \
     micromamba activate analysis-systems && \
     rm -rf /opt/micromamba/envs/lock && \
-    chmod -R 777 /opt/micromamba/envs && \
+    chmod --recursive 777 /opt/micromamba/envs && \
     micromamba env list && \
     micromamba install \
         --channel conda-forge \
@@ -108,7 +108,7 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
         /.config \
         /.cache \
         /work && \
-    chmod 777 \
+    chmod --recursive 777 \
         /.local \
         /.jupyter \
         /.config \
@@ -118,7 +118,7 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     chmod 777 /docker/entrypoint.sh && \
     echo 'export JUPYTER_PATH="/opt/micromamba/envs/analysis-systems/share/jupyter:${JUPYTER_PATH}"' >> /etc/.bashrc && \
     echo 'export JUPYTER_DATA_DIR="/opt/micromamba/envs/analysis-systems/share/jupyter"' >> /etc/.bashrc && \
-    chmod 777 /opt/micromamba/envs/analysis-systems/share/jupyter && \
+    chmod --recursive 777 /opt/micromamba/envs/analysis-systems/share/jupyter && \
     echo "# image build date: $(date)" > /docker/build_date.txt
 
 WORKDIR /work
