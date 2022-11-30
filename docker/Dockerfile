@@ -128,7 +128,7 @@ ENV HOME=/work
 RUN . /etc/.bashrc && \
     micromamba activate analysis-systems && \
     jupyter lab --generate-config && \
-    sed -i 's|# c.ServerApp.terminado_settings = {}|c.ServerApp.terminado_settings = { "shell_command": ["/usr/bin/bash"] }|g' "${HOME}/.jupyter/jupyter_lab_config.py" && \
+    sed -i 's|# c.ServerApp.terminado_settings = {}|c.ServerApp.terminado_settings = { "shell_command": ["/usr/bin/bash", "-l"] }|g' "${HOME}/.jupyter/jupyter_lab_config.py" && \
     ln --symbolic $(jupyter --config-dir) /usr/local/etc/jupyter && \
     chmod -R 777 /work
 
