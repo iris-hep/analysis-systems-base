@@ -85,6 +85,7 @@ RUN yum install -y \
 
 ARG HTCONDOR_VERSION=9.0
 # install condor v9
+# /etc/condor and /direct/condor are necessary bind mounts for BNL
 RUN mkdir -p -v /etc/condor && \
     mkdir -p -v /direct/condor && \
     yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el7.noarch.rpm && \
