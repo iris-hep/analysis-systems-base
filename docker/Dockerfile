@@ -83,6 +83,15 @@ RUN yum install -y \
 #         torch-cluster \
 #         torch-spline-conv
 
+ARG HTCONDOR_VERSION=9.0
+# install condor v9
+RUN mkdir -p -v /etc/condor && \
+    mkdir -p -v /direct/condor && \
+    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el7.noarch.rpm && \
+    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/el7/x86_64/release/condor-9.0.17-1.el7.x86_64.rpm && \
+    yum clean all && \
+    yum autoremove -y
+
 # * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
 # * Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
 # * Ensure default directories and that they are writeable by arbitrary user
@@ -90,9 +99,9 @@ RUN yum install -y \
 # * Set JUPYTER_PATH and JUPYTER_DATA_DIR
 # * Add build date file to easily check if analysis facilities have synced images
 RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
-    mkdir -p /u0b/software/jupyter/kernels && \
+    mkdir -p -v /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
-    mkdir -p \
+    mkdir -p -v \
         /.local \
         /.jupyter \
         /.config \
