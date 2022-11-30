@@ -33,7 +33,8 @@ dependencies:
   - scipy
   - tini
   - jupyter-server-proxy
-  - htcondor==9.2.0
+  # BNL currently requires HTCondor v9.0.x
+  - htcondor==9.0.17
   # coffea[servicex] components available on conda-forge
   - aiostream
   - tenacity

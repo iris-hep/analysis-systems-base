@@ -35,7 +35,7 @@ RUN yum install -y \
     . /etc/.bashrc && \
     micromamba activate analysis-systems && \
     rm -rf /opt/micromamba/envs/lock && \
-    chmod -R 777 /opt/micromamba/envs && \
+    chmod --recursive 777 /opt/micromamba/envs && \
     micromamba env list && \
     micromamba install \
         --channel conda-forge \
@@ -83,23 +83,16 @@ RUN yum install -y \
 #         torch-cluster \
 #         torch-spline-conv
 
-ARG HTCONDOR_VERSION=9.0
-# install condor v9
 # /etc/condor and /direct/condor are necessary bind mounts for BNL
-RUN mkdir -p -v /etc/condor && \
-    mkdir -p -v /direct/condor && \
-    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el7.noarch.rpm && \
-    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/el7/x86_64/release/condor-9.0.17-1.el7.x86_64.rpm && \
-    yum clean all && \
-    yum autoremove -y
-
 # * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
 # * Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
 # * Ensure default directories and that they are writeable by arbitrary user
 # * Set defaults for jupyter lab
 # * Set JUPYTER_PATH and JUPYTER_DATA_DIR
 # * Add build date file to easily check if analysis facilities have synced images
-RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
+RUN mkdir -p -v /etc/condor && \
+    mkdir -p -v /direct/condor && \
+    ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
     mkdir -p -v /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
     mkdir -p -v \
@@ -108,7 +101,7 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
         /.config \
         /.cache \
         /work && \
-    chmod 777 \
+    chmod --recursive 777 \
         /.local \
         /.jupyter \
         /.config \
@@ -118,7 +111,7 @@ RUN ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/g
     chmod 777 /docker/entrypoint.sh && \
     echo 'export JUPYTER_PATH="/opt/micromamba/envs/analysis-systems/share/jupyter:${JUPYTER_PATH}"' >> /etc/.bashrc && \
     echo 'export JUPYTER_DATA_DIR="/opt/micromamba/envs/analysis-systems/share/jupyter"' >> /etc/.bashrc && \
-    chmod 777 /opt/micromamba/envs/analysis-systems/share/jupyter && \
+    chmod --recursive 777 /opt/micromamba/envs/analysis-systems/share/jupyter && \
     echo "# image build date: $(date)" > /docker/build_date.txt
 
 WORKDIR /work
