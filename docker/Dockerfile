@@ -96,6 +96,8 @@ RUN mkdir -p -v /etc/condor && \
     mkdir -p -v /direct/condor && \
     mkdir -p -v /usatlas/atlas01 && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
+    . /etc/.bashrc && \
+    micromamba activate analysis-systems && \
     ln --symbolic "$(dirname $(command -v condor_q))"/condor_* /usr/bin/ && \
     mkdir -p -v /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
