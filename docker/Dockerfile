@@ -90,8 +90,10 @@ RUN yum install -y \
 # * Set defaults for jupyter lab
 # * Set JUPYTER_PATH and JUPYTER_DATA_DIR
 # * Add build date file to easily check if analysis facilities have synced images
+# * Add bind mount to Lustre space at BNL SDCC
 RUN mkdir -p -v /etc/condor && \
     mkdir -p -v /direct/condor && \
+    mkdir -p -v /usatlas/atlas01 && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
     mkdir -p -v /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
