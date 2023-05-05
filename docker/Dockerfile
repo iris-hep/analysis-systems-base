@@ -54,10 +54,10 @@ RUN yum install -y \
         --requirement /docker/requirements.lock && \
     python -m pip --no-cache-dir install \
         --find-links https://data.pyg.org/whl/torch-1.12.1+cpu.html \
-        torch-scatter \
-        torch-sparse \
-        torch-cluster \
-        torch-spline-conv && \
+        'torch-scatter==2.1.0+pt112cpu' \
+        'torch-sparse==0.6.15+pt112cpu' \
+        'torch-cluster==1.6.0+pt112cpu' \
+        'torch-spline-conv==1.2.1+pt112cpu' && \
     python -m ipykernel install \
         --name="analysis-systems" \
         --display-name="Analysis Systems" \
