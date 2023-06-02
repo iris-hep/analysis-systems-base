@@ -81,7 +81,12 @@ def build(session):
     Build image
     """
     current_date = datetime.now().strftime("%Y-%m-%d")
-    session.run("docker", "pull", "centos:centos7", external=True)
+    session.run(
+        "docker",
+        "pull",
+        "gitlab-registry.cern.ch/linuxsupport/alma9-base:20230601-2",
+        external=True,
+    )
     session.run(
         "docker",
         "build",

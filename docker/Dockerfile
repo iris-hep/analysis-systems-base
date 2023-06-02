@@ -1,4 +1,4 @@
-FROM centos:centos7 as base
+FROM gitlab-registry.cern.ch/linuxsupport/alma9-base:20230601-2 as base
 # FROM coffeateam/coffea-dask:0.7.19-fastjet-3.3.4.0rc9-ge92ece7 as base
 
 SHELL [ "/bin/bash", "-c" ]
