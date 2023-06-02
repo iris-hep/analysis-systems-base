@@ -87,11 +87,11 @@ ARG HTCONDOR_VERSION=9.0
 # install condor v9
 # /etc/condor and /direct/condor are necessary bind mounts for BNL
 RUN mkdir -p -v /etc/condor && \
-    mkdir -p -v /direct/condor && \
-    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el7.noarch.rpm && \
-    yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/el7/x86_64/release/condor-9.0.17-1.el7.x86_64.rpm && \
-    yum clean all && \
-    yum autoremove -y
+    mkdir -p -v /direct/condor
+#     yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el7.noarch.rpm && \
+#     yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/el7/x86_64/release/condor-9.0.17-1.el7.x86_64.rpm && \
+#     yum clean all && \
+#     yum autoremove -y
 
 # /etc/condor and /direct/condor are necessary bind mounts for BNL
 # * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
