@@ -39,6 +39,7 @@ RUN yum install -y \
     micromamba env list && \
     micromamba install \
         --channel conda-forge \
+        --freeze-installed \
         --yes \
             cmake \
             gcc \
