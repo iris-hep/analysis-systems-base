@@ -86,8 +86,10 @@ RUN yum install -y \
 
 # /etc/condor and /direct/condor are necessary bind mounts for BNL
 # * Make a symbolic link between installation <...>/etc/grid-security and actual directory /etc/grid-security
-# * Make a libcrypt.so.1 symlink pointing to libcrypt.so.2 for SDCC host Python ABI compatability
-# * Make a libssl.so.10 symlink pointing to libssl.so.3 for SDCC host Python ABI compatability
+# * SDCC host Python ABI compatability:
+#     - libcrypt.so.1 symlink pointing to libcrypt.so.2
+#     - libcrypto.so.10 symlink pointing to libcrypto.so.3
+#     - libssl.so.10 symlink pointing to libssl.so.3
 # * Make "analysis-systems" kernel discoverable to BNL SDCC which has kenerls at /u0b/software/jupyter/kernels/
 # * Ensure default directories and that they are writeable by arbitrary user
 # * Set defaults for jupyter lab
@@ -99,6 +101,7 @@ RUN mkdir -p -v /etc/condor && \
     mkdir -p -v /usatlas/atlas01 && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/etc/grid-security /etc/grid-security && \
     ln --symbolic /lib64/libcrypt.so.2 /lib64/libcrypt.so.1 && \
+    ln --symbolic /lib64/libcrypto.so.3 /lib64/libcrypto.so.10 && \
     ln --symbolic /lib64/libssl.so.3 /lib64/libssl.so.10 && \
     mkdir -p -v /u0b/software/jupyter/kernels && \
     ln --symbolic /opt/micromamba/envs/analysis-systems/share/jupyter/kernels/analysis-systems /u0b/software/jupyter/kernels/analysis-systems && \
