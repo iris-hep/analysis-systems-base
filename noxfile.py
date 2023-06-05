@@ -90,6 +90,7 @@ def build(session):
     session.run(
         "docker",
         "build",
+        "--progress=plain",
         "--file",
         "docker/Dockerfile",
         "--tag",
