@@ -51,3 +51,4 @@ dependencies:
   - cabinetry==0.5.1
   - mplhep==0.3.26
   - pip >=22.3
+  - papermill==2.6.0
